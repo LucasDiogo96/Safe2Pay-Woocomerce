@@ -69,7 +69,9 @@ class WC_Safe2Pay_API
 	{
 		$methods = array(
 			'credit-card'    => 'creditCard',
-			'banking-ticket' => 'boleto'
+			'banking-ticket' => 'boleto',
+			'debit-card' => 'debitCard',
+			'crypto-currency' => 'cryptocurrency',
 		);
 
 		return isset($methods[$method]) ? $methods[$method] : '';
@@ -173,7 +175,7 @@ class WC_Safe2Pay_API
 		if ('BOLETO' === strtoupper($method)) {
 
 			$dueDate = new DateTime();
-			$dueDate->add(new DateInterval('P5D'));
+			$dueDate->add(new DateInterval('P3D'));
 
 			$paymentMethod  = "1";
 			$PaymentObject = array(
@@ -187,6 +189,20 @@ class WC_Safe2Pay_API
 				'ExpirationDate' => $posted['safe2pay-card-expiry-field'],
 				'SecurityCode' => $posted['safe2pay-card-cvc'],
 				'InstallmentQuantity' => $posted['safe2pay-card-installments']
+			);
+		} else if ('CRYPTOCURRENCY' === strtoupper($method)) {
+			$paymentMethod  = "3";
+			$PaymentObject = array(
+				'Symbol' => $posted['safe2pay_currency-type'],
+			);
+			
+		} else if ('DEBITCARD' === strtoupper($method)) {
+			$paymentMethod  = "4";
+			$PaymentObject = array(
+				'Holder' => $posted['safe2pay-debit-card-holder-name'],
+				'CardNumber' => $posted['safe2pay-debit-card-number'],
+				'ExpirationDate' => $posted['safe2pay-debit-card-expiry'],
+				'SecurityCode' => $posted['safe2pay-debit-card-cvc']
 			);
 		}
 
@@ -338,7 +354,7 @@ class WC_Safe2Pay_API
 
 
 					if ('yes' == $this->gateway->debug) {
-						$this->gateway->log->add($this->gateway->id, 'Boleto gerado com sucesso!');
+						$this->gateway->log->add($this->gateway->id, 'Pagamento gerado com sucesso!');
 					}
 
 					return array(

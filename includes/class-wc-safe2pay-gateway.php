@@ -23,7 +23,7 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway {
 		$this->icon               = apply_filters( 'woocommerce_safe2pay_icon', plugins_url( 'assets/images/safe2pay.png', plugin_dir_path( __FILE__ ) ) );
 		$this->method_title       = __( 'Safe2Pay', 'woocommerce-safe2pay' );
 		$this->method_description = __( 'Accept payments by credit card, bank debit or banking ticket using the Safe2Pay.', 'woocommerce-safe2pay' );
-		$this->order_button_text  = __( 'Proceed to payment', 'woocommerce-safe2pay' );
+		$this->order_button_text  = __( 'Finalizar', 'woocommerce-safe2pay' );
 
 		// Load the form fields.
 		$this->init_form_fields();
@@ -40,12 +40,13 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway {
 		$this->sandbox_token     = $this->get_option( 'sandbox_token' );
 		$this->method            = $this->get_option( 'method', 'direct' );
 		$this->tc_credit         = $this->get_option( 'tc_credit', 'yes' );
-		$this->tc_transfer       = $this->get_option( 'tc_transfer', 'yes' );
+		$this->tc_debit          = $this->get_option( 'tc_debit', 'yes' );
 		$this->tc_ticket         = $this->get_option( 'tc_ticket', 'yes' );
-		$this->tc_ticket_message = $this->get_option( 'tc_ticket_message', 'yes' );
+		$this->tc_cryptocurrency = $this->get_option( 'tc_cryptocurrency', 'yes' );
 		$this->invoice_prefix    = $this->get_option( 'invoice_prefix', 'WC-' );
 		$this->sandbox           = $this->get_option( 'sandbox', 'no' );
 		$this->debug             = $this->get_option( 'debug' );
+		$this->duedate  =  $this->get_option( 'duedate' );
 
 		// Active logs.
 		if ( 'yes' === $this->debug ) {
@@ -220,16 +221,28 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway {
 				'type'        => 'title',
 				'description' => '',
 			),
-			'tc_credit'            => array(
-				'title'   => __( 'Credit Card', 'woocommerce-safe2pay' ),
-				'type'    => 'checkbox',
-				'label'   => __( 'Enable Credit Card for Transparente Checkout', 'woocommerce-safe2pay' ),
-				'default' => 'yes',
-			),
 			'tc_ticket'            => array(
 				'title'   => __( 'Banking Ticket', 'woocommerce-safe2pay' ),
 				'type'    => 'checkbox',
-				'label'   => __( 'Enable Banking Ticket for Transparente Checkout', 'woocommerce-safe2pay' ),
+				'label'   => __( 'Enable Banking Ticket', 'woocommerce-safe2pay' ),
+				'default' => 'yes',
+			),
+			'tc_credit'            => array(
+				'title'   => __( 'Credit Card', 'woocommerce-safe2pay' ),
+				'type'    => 'checkbox',
+				'label'   => __( 'Enable Credit Card', 'woocommerce-safe2pay' ),
+				'default' => 'yes',
+			),	
+			'tc_debit'            => array(
+				'title'   => __( 'Debit Card', 'woocommerce-safe2pay' ),
+				'type'    => 'checkbox',
+				'label'   => __( 'Enable Debit Card', 'woocommerce-safe2pay' ),
+				'default' => 'yes',
+			),
+			'tc_cryptocurrency'            => array(
+				'title'   => __( 'CryptoCurrency', 'woocommerce-safe2pay' ),
+				'type'    => 'checkbox',
+				'label'   => __( 'Enable CryptoCurrency', 'woocommerce-safe2pay' ),
 				'default' => 'yes',
 			),
 			'behavior'             => array(
@@ -273,8 +286,9 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway {
 		$mailer->send( get_option( 'admin_email' ), $subject, $mailer->wrap_message( $title, $message ) );
 	}
 
-	public function LoadPaymentFields() {
+	public function payment_fields() {
 		wp_enqueue_script( 'wc-credit-card-form' );
+		wp_enqueue_script( 'wc-debit-card-form' );
 
 		$description = $this->get_description();
 		if ( $description ) {
@@ -287,9 +301,9 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway {
 				'transparent-checkout-form.php', array(
 					'cart_total'        => $cart_total,
 					'tc_credit'         => $this->tc_credit,
-
 					'tc_ticket'         => $this->tc_ticket,
-					'tc_ticket_message' => $this->tc_ticket_message,
+					'tc_debit'          => $this->tc_debit,
+					'tc_cryptocurrency' => $this->tc_cryptocurrency,
 					'flag'              => plugins_url( 'assets/images/brazilian-flag.png', plugin_dir_path( __FILE__ ) ),
 				), 'woocommerce/safe2pay/', WC_Safe2Pay::get_templates_path()
 			);
@@ -385,6 +399,7 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway {
 			'method'       => '',
 			'installments' => '',
 			'link'         => '',
+			'WalletAddress'=> '',
 		);
 
 		if ($order->Data['billing']['email'] != null) {
@@ -410,6 +425,23 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway {
 				$payment_data['type'] = '2';
 			
 				$payment_data['installments'] = $_POST['safe2pay_card_installments'];
+			}
+			else if(strtoupper($_POST['safe2pay_payment_method']) === "CRYPTO-CURRENCY"){
+
+				$payment_data['type'] = '3';
+			
+				$payment_data['link'] = sanitize_text_field( (string)  $posted->QrCode );
+				$meta_data[ __( 'Payment URL', 'woocommerce-safe2pay' ) ] = $payment_data['link'];
+
+				$payment_data['WalletAddress'] = sanitize_text_field( (string)  $posted->WalletAddress );
+				$meta_data[ __( 'WalletAddress', 'woocommerce-safe2pay' ) ] = $payment_data['WalletAddress'];
+			}
+			if(strtoupper($_POST['safe2pay_payment_method']) === "DEBIT-CARD"){
+
+				$payment_data['type'] = '4';
+			
+				// $payment_data['link'] = sanitize_text_field( (string)  $posted->QrCode );
+				// $meta_data[ __( 'Payment URL', 'woocommerce-safe2pay' ) ] = $payment_data['link'];
 			}
 		}
 

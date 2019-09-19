@@ -150,12 +150,43 @@
 
 /* Banking ticket */
 #safe2pay-icon-ticket {
-	background: transparent url("../../images/transparent-checkout-icons.png") no-repeat top right;
-	display: block;
-	float: left;
-	height: 51px;
-	margin: 0 10px 5px 0;
-	width: 51px;
+    background: transparent url(../../images/imgBarcode.png) no-repeat;
+    display: block;
+    float: left;
+    height: 85px;
+    margin: 0 10px 5px 0;
+    width: 68px;
+	margin-left: 2px;
+}
+
+#safe2pay-icon-credit-card {
+    background: transparent url(../../images/iconcredit.png) no-repeat;
+    display: block;
+    float: left;
+    height: 85px;
+    margin: 0 10px 5px 0;
+    width: 68px;
+	margin-left: 2px;
+}
+
+#safe2pay-icon-debit-card {
+    background: transparent url(../../images/debitAccount.png) no-repeat;
+    display: block;
+    float: left;
+    height: 85px;
+    margin: 0 10px 5px 0;
+    width: 68px;
+	margin-left: 2px;
+}
+
+#safe2pay-icon-cryptocurrency {
+    background: transparent url(../../images/iconbitcoin.png) no-repeat;
+    display: block;
+    float: left;
+    height: 85px;
+    margin: 0 10px 5px 0;
+    width: 68px;
+	margin-left: 2px;
 }
 
 .woocommerce #payment ul.payment_methods li .woocommerce-safe2pay-form-storefront p#safe2pay-card-holder-name-field,
@@ -166,6 +197,18 @@
 .woocommerce-page #payment ul.payment_methods li .woocommerce-safe2pay-form-storefront p#safe2pay-card-number-field,
 .woocommerce-page #payment ul.payment_methods li .woocommerce-safe2pay-form-storefront p#safe2pay-card-installments-field,
 .woocommerce-page #payment ul.payment_methods li .woocommerce-safe2pay-form-storefront p#safe2pay-card-holder-cpf-field {
+	float: none;
+	width: 100%;
+}
+
+.woocommerce #payment ul.payment_methods li .woocommerce-safe2pay-form-storefront p#safe2pay-debit-card-holder-name-field,
+.woocommerce #payment ul.payment_methods li .woocommerce-safe2pay-form-storefront p#safe2pay-debit-card-number-field,
+.woocommerce #payment ul.payment_methods li .woocommerce-safe2pay-form-storefront p#safe2pay-debit-card-installments-field,
+.woocommerce #payment ul.payment_methods li .woocommerce-safe2pay-form-storefront p#safe2pay-debit-card-holder-cpf-field,
+.woocommerce-page #payment ul.payment_methods li .woocommerce-safe2pay-form-storefront p#safe2pay-debit-card-holder-name-field,
+.woocommerce-page #payment ul.payment_methods li .woocommerce-safe2pay-form-storefront p#safe2pay-debit-card-number-field,
+.woocommerce-page #payment ul.payment_methods li .woocommerce-safe2pay-form-storefront p#safe2pay-debit-card-installments-field,
+.woocommerce-page #payment ul.payment_methods li .woocommerce-safe2pay-form-storefront p#safe2pay-debit-card-holder-cpf-field {
 	float: none;
 	width: 100%;
 }
@@ -200,6 +243,14 @@
 	.woocommerce #payment ul.payment_methods li #safe2pay-credit-card-form p.form-row.form-row-last,
 	.woocommerce-page #payment ul.payment_methods li #safe2pay-credit-card-form p.form-row.form-row-first,
 	.woocommerce-page #payment ul.payment_methods li #safe2pay-credit-card-form p.form-row.form-row-last {
+		float: none;
+		width: 96%;
+	}
+
+	.woocommerce #payment ul.payment_methods li #safe2pay-debit-card-form p.form-row.form-row-first,
+	.woocommerce #payment ul.payment_methods li #safe2pay-debit-card-form p.form-row.form-row-last,
+	.woocommerce-page #payment ul.payment_methods li #safe2pay-debit-card-form p.form-row.form-row-first,
+	.woocommerce-page #payment ul.payment_methods li #safe2pay-debit-card-form p.form-row.form-row-last {
 		float: none;
 		width: 96%;
 	}
