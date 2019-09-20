@@ -346,6 +346,13 @@ class WC_Safe2Pay_API
 
 
 				if ($response->HasError == false) {
+					if($response->ResponseDetail->Status == 8){
+						return array(
+							'url'   => '',
+							'data'  => '',
+							'error' => array('<strong>' . __('Safe2Pay', 'woocommerce-safe2pay') . '</strong>: ' .  __($response->ResponseDetail->Message, 'woocommerce-safe2pay')),
+						);
+					}
 
 
 					if ('yes' == $this->gateway->debug) {
