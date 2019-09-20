@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:          WooCommerce Safe2Pay
+ * Plugin Name:          Safe2Pay
  * Plugin URI:           https://github.com/LucasDiogo96/Woocomerce-Safe2Pay
  * Description:          Includes Safe2Pay as a payment gateway to WooCommerce.
  * Author:               Lucas Diogo da Silva
