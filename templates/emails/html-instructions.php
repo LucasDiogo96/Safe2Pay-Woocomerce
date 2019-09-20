@@ -36,18 +36,26 @@ if (!defined('ABSPATH')) {
 			<?php _e('Pagamento autorizado', 'woocommerce-safe2pay'); ?></a>
 			<?php _e('Tudo certo! Seu pedido será processado.', 'woocommerce-safe2pay'); ?>
 	</div>
+
 <?php elseif ('3' == $type) : ?>
 	<div class="order_details">
+		<div style="margin-left: auto;margin-right: auto;width: 10em;">
+			<img src="<?php echo esc_url($link); ?>" alt="QR CODE">
+			<br />
+		</div>
 
-		<span>
-			<span>
-				<img src="<?php echo esc_url($link); ?>" alt="QR CODE">
-				</a>
+		<div style="text-align: center; font-size: 12px;">
+			<span style="">Wallet Address: <?php echo ($walletaddress); ?></span>
+			<br>
+		</div>
+		
+		<br />
 
-				<?php _e('Após a confirmação do pagamento, Seu pedido será processado.', 'woocommerce-safe2pay'); ?>
-				<br />
+		<div style="text-align: center;">
+			<?php _e('Após a confirmação do pagamento, Seu pedido será processado.', 'woocommerce-safe2pay'); ?>
+		</div>
 
-			</span>
+		<br />
 
 	</div>
 <?php elseif ('4' == $type) : ?>

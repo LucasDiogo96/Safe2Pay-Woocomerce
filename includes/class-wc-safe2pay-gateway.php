@@ -154,23 +154,23 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway {
 			'title'                => array(
 				'title'       => __( 'Título', 'woocommerce-safe2pay' ),
 				'type'        => 'text',
-				'description' => __( 'This controls the title which the user sees during checkout.', 'woocommerce-safe2pay' ),
+				'description' => __( 'Título do método de pagamento', 'woocommerce-safe2pay' ),
 				'desc_tip'    => true,
 				'default'     => __( 'Safe2Pay', 'woocommerce-safe2pay' ),
 			),
 			'description'          => array(
-				'title'       => __( 'Description', 'woocommerce-safe2pay' ),
+				'title'       => __( 'Descrição do método de pagamento', 'woocommerce-safe2pay' ),
 				'type'        => 'textarea',
-				'description' => __( 'This controls the description which the user sees during checkout.', 'woocommerce-safe2pay' ),
-				'default'     => __( 'Pay via Safe2Pay', 'woocommerce-safe2pay' ),
+				'description' => __( 'Descrição do método de pagamento durante o checkout.', 'woocommerce-safe2pay' ),
+				'default'     => __( 'Pagar via Safe2Pay', 'woocommerce-safe2pay' ),
 			),
 			'integration'          => array(
-				'title'       => __( 'Integration', 'woocommerce-safe2pay' ),
+				'title'       => __( 'Integração', 'woocommerce-safe2pay' ),
 				'type'        => 'title',
 				'description' => '',
 			),
 			'method'               => array(
-				'title'       => __( 'Integration method', 'woocommerce-safe2pay' ),
+				'title'       => __( 'Método de integração', 'woocommerce-safe2pay' ),
 				'type'        => 'select',
 				'description' => __( 'Choose how the customer will interact with the Safe2Pay. Redirect (Client goes to Safe2Pay page) or Lightbox (Inside your store)', 'woocommerce-safe2pay' ),
 				'desc_tip'    => true,
@@ -183,66 +183,66 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway {
 			'sandbox'              => array(
 				'title'       => __( 'Safe2Pay Sandbox', 'woocommerce-safe2pay' ),
 				'type'        => 'checkbox',
-				'label'       => __( 'Enable Safe2Pay Sandbox', 'woocommerce-safe2pay' ),
+				'label'       => __( 'Ativar/Desativar Safe2Pay Sandbox', 'woocommerce-safe2pay' ),
 				'desc_tip'    => true,
 				'default'     => 'no',
-				'description' => __( 'Safe2Pay Sandbox can be used to test the payments.', 'woocommerce-safe2pay' ),
+				'description' => __( 'Safe2Pay Sandbox pode ser utilizado para testes de pagamento.', 'woocommerce-safe2pay' ),
 			),
 			'token'                => array(
 				'title'       => __( 'Safe2Pay Token', 'woocommerce-safe2pay' ),
 				'type'        => 'text',
 				/* translators: %s: link to Safe2Pay settings */
-				'description' => sprintf( __( 'Please enter your Safe2Pay token. This is needed to process the payment and notifications.', 'woocommerce-safe2pay' ), '<a href="https://admin.safe2pay.com.br/integracao">' . __( 'here', 'woocommerce-safe2pay' ) . '</a>' ),
+				'description' => sprintf( __( 'Insira seu Token aqui. Isso é necessário para processar os pagamentos.', 'woocommerce-safe2pay' ), '<a href="https://admin.safe2pay.com.br/integracao">' . __( 'here', 'woocommerce-safe2pay' ) . '</a>' ),
 				'default'     => '',
 			),
 			'secretkey'                => array(
 				'title'       => __( 'Safe2Pay SecretKey', 'woocommerce-safe2pay' ),
 				'type'        => 'text',
 				/* translators: %s: link to Safe2Pay settings */
-				'description' => sprintf( __( 'Please enter your Safe2Pay Secret Key. This is needed to process the payment and notifications.', 'woocommerce-safe2pay' ), '<a href="https://admin.safe2pay.com.br/integracao">' . __( 'here', 'woocommerce-safe2pay' ) . '</a>' ),
+				'description' => sprintf( __( 'Insira sua Secret Key aqui. Isso é necessário para receber notificações de mudanças de status do pagamento.', 'woocommerce-safe2pay' ), '<a href="https://admin.safe2pay.com.br/integracao">' . __( 'here', 'woocommerce-safe2pay' ) . '</a>' ),
 				'default'     => '',
 			),
 			'sandbox_token'        => array(
 				'title'       => __( 'Safe2Pay Sandbox Token', 'woocommerce-safe2pay' ),
 				'type'        => 'text',
 				/* translators: %s: link to Safe2Pay settings */
-				'description' => sprintf( __( 'Please enter your Safe2Pay sandbox token. You can get your sandbox token', 'woocommerce-safe2pay' ), '<a href=https://admin.safe2pay.com.br/integracao">' . __( 'here', 'woocommerce-safe2pay' ) . '</a>' ),
+				'description' => sprintf( __( 'Insira seu Token de Sandbox aqui. Isso é necessário para processar os pagamentos em ambiente de teste.', 'woocommerce-safe2pay' ), '<a href=https://admin.safe2pay.com.br/integracao">' . __( 'here', 'woocommerce-safe2pay' ) . '</a>' ),
 				'default'     => '',
 			),
 			'sandbox_secretkey'                => array(
 				'title'       => __( 'Safe2Pay Sandbox SecretKey', 'woocommerce-safe2pay' ),
 				'type'        => 'text',
 				/* translators: %s: link to Safe2Pay settings */
-				'description' => sprintf( __( 'Please enter your Safe2Pay sandbox secret key. This is needed to process the payment and notifications.', 'woocommerce-safe2pay' ), '<a href="https://admin.safe2pay.com.br/integracao">' . __( 'here', 'woocommerce-safe2pay' ) . '</a>' ),
+				'description' => sprintf( __( 'Insira sua Secret Key de Sandbox aqui. Isso é necessário para receber notificações de mudança de status do pagamento em ambiente de teste.', 'woocommerce-safe2pay' ), '<a href="https://admin.safe2pay.com.br/integracao">' . __( 'here', 'woocommerce-safe2pay' ) . '</a>' ),
 				'default'     => '',
 			),
 			'transparent_checkout' => array(
-				'title'       => __( 'Transparent Checkout Options', 'woocommerce-safe2pay' ),
+				'title'       => __( 'Opções de pagamento', 'woocommerce-safe2pay' ),
 				'type'        => 'title',
 				'description' => '',
 			),
 			'tc_ticket'            => array(
-				'title'   => __( 'Banking Ticket', 'woocommerce-safe2pay' ),
+				'title'   => __( 'Boleto Bancário', 'woocommerce-safe2pay' ),
 				'type'    => 'checkbox',
-				'label'   => __( 'Enable Banking Ticket', 'woocommerce-safe2pay' ),
+				'label'   => __( 'Boleto Bancário', 'woocommerce-safe2pay' ),
 				'default' => 'yes',
 			),
 			'tc_credit'            => array(
-				'title'   => __( 'Credit Card', 'woocommerce-safe2pay' ),
+				'title'   => __( 'Cartão de Crédito', 'woocommerce-safe2pay' ),
 				'type'    => 'checkbox',
-				'label'   => __( 'Enable Credit Card', 'woocommerce-safe2pay' ),
+				'label'   => __( 'Cartão de crédito', 'woocommerce-safe2pay' ),
 				'default' => 'yes',
 			),	
 			'tc_debit'            => array(
-				'title'   => __( 'Debit Card', 'woocommerce-safe2pay' ),
+				'title'   => __( 'Cartão de Débito', 'woocommerce-safe2pay' ),
 				'type'    => 'checkbox',
-				'label'   => __( 'Enable Debit Card', 'woocommerce-safe2pay' ),
+				'label'   => __( 'Cartão de débito', 'woocommerce-safe2pay' ),
 				'default' => 'yes',
 			),
 			'tc_cryptocurrency'            => array(
-				'title'   => __( 'CryptoCurrency', 'woocommerce-safe2pay' ),
+				'title'   => __( 'Criptomoedas', 'woocommerce-safe2pay' ),
 				'type'    => 'checkbox',
-				'label'   => __( 'Enable CryptoCurrency', 'woocommerce-safe2pay' ),
+				'label'   => __( 'Criptomoeda', 'woocommerce-safe2pay' ),
 				'default' => 'yes',
 			),
 			'behavior'             => array(
@@ -433,8 +433,8 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway {
 				$payment_data['link'] = sanitize_text_field( (string)  $posted->QrCode );
 				$meta_data[ __( 'Payment URL', 'woocommerce-safe2pay' ) ] = $payment_data['link'];
 
-				$payment_data['WalletAddress'] = sanitize_text_field( (string)  $posted->WalletAddress );
-				$meta_data[ __( 'WalletAddress', 'woocommerce-safe2pay' ) ] = $payment_data['WalletAddress'];
+				$payment_data['walletaddress'] = sanitize_text_field( (string)  $posted->WalletAddress );
+				$meta_data[ __( 'WalletAddress', 'woocommerce-safe2pay' ) ] = $payment_data['walletaddress'];
 			}
 			if(strtoupper($_POST['safe2pay_payment_method']) === "DEBIT-CARD"){
 
@@ -571,6 +571,7 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway {
 					'type'         => $data['type'],
 					'link'         => $data['link'],
 					'method'       => $data['method'],
+					'walletaddress'         => $data['walletaddress'],
 					'installments' => $data['installments'],
 				), 'woocommerce/safe2pay/', WC_Safe2Pay::get_templates_path()
 			);
@@ -599,6 +600,7 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway {
 					'emails/plain-instructions.php', array(
 						'type'         => $data['type'],
 						'link'         => $data['link'],
+						'walletaddress'         => $data['walletaddress'],
 						'method'       => $data['method'],
 						'installments' => $data['installments'],
 					), 'woocommerce/safe2pay/', WC_Safe2Pay::get_templates_path()
@@ -608,6 +610,7 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway {
 					'emails/html-instructions.php', array(
 						'type'         => $data['type'],
 						'link'         => $data['link'],
+						'walletaddress'=> $data['walletaddress'],
 						'method'       => $data['method'],
 						'installments' => $data['installments'],
 					), 'woocommerce/safe2pay/', WC_Safe2Pay::get_templates_path()

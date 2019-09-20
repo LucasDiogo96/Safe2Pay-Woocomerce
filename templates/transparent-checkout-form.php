@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) {
 
 <fieldset id="safe2pay-payment-form">
 
-	<ul id="safe2pay-payment-methods">
+	<ul id="safe2pay-payment-methods" style="margin-bottom: 5%;">
 	<?php if ('yes' == $tc_ticket) : ?>
 			<li><label>
 					<input id="safe2pay-payment-method-banking-ticket" type="radio" name="safe2pay_payment_method" value="banking-ticket" <?php checked(true, ('no' == $tc_cryptocurrency && 'no' == $tc_credit && 'no' == $tc_debit && 'yes' == $tc_ticket), true); ?> />
@@ -65,7 +65,7 @@ if (!defined('ABSPATH')) {
 
 			<p id="safe2pay-card-holder-name-field" class="form-row form-row-first">
 				<label for="safe2pay-card-holder-name"><?php _e('Nome impresso no cartão', 'woocommerce-safe2pay'); ?><span class="required">*</span></label>
-				<input id="safe2pay-card-holder-name" name="safe2pay_card_holder_name" class="input-text" type="text" autocomplete="off" style="font-size: 1.5em; padding: 8px;height: 60px;" />
+				<input id="safe2pay-card-holder-name" name="safe2pay_card_holder_name" class="input-text" type="text" autocomplete="off" style="font-size: 1.5em; padding: 8px;" />
 			</p>
 			<p id="safe2pay-card-number-field" class="form-row form-row-last">
 				<label for="safe2pay-card-number"><?php _e('Número do cartão', 'woocommerce-safe2pay'); ?> <span class="required">*</span></label>

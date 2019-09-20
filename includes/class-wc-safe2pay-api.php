@@ -224,8 +224,8 @@ class WC_Safe2Pay_API
 					"Street" => $posted['billing_address_1'],
 					"Number" =>   isset($posted['shipping_number']) ? $posted['shipping_number'] : 'S/N',
 					"District" =>  isset($posted['shipping_neighborhood']) ? $posted['shipping_neighborhood'] : 'Não informado',
-					"ZipCode" => $posted['shipping_postcode'],
-					"CityName" =>  $posted['shipping_city'],
+					"ZipCode" => $posted['billing_postcode'],
+					"CityName" =>  $posted['billing_city'],
 					"StateInitials" => $posted['shipping_state'],
 					"CountryName" =>  'BRASIL'
 				)

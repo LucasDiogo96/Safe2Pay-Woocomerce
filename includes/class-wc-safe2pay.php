@@ -72,6 +72,7 @@ class WC_Safe2Pay
 			));
 		});
 
+	
 		if (class_exists('WC_Payment_Gateway')) {
 			self::includes();
 
@@ -81,6 +82,7 @@ class WC_Safe2Pay
 			add_action('admin_notices', array(__CLASS__, 'woocommerce_missing_notice'));
 		}
 	}
+	
 
 	/**
 	 * Get templates path.
