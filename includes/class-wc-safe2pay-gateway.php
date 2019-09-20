@@ -485,11 +485,11 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway {
 
 				switch ($posted->Status) {
 					case "1":
-						$order->update_status( 'pending', __( 'Safe2Pay: The buyer initiated the transaction, but so far the Safe2Pay not received any payment information.', 'woocommerce-safe2pay' ) );
+						$order->update_status( 'pending', __( 'Safe2Pay: Pendente.', 'woocommerce-safe2pay' ) );
 
 						break;
 					case "2":
-						$order->update_status( 'processing', __( 'Safe2Pay: Payment under review.', 'woocommerce-safe2pay' ) );
+						$order->update_status( 'processing', __( 'Safe2Pay: Processamento.', 'woocommerce-safe2pay' ) );
 
 						// Reduce stock for billets.
 						if ( function_exists( 'wc_reduce_stock_levels' ) ) {
@@ -503,7 +503,7 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway {
 							$order->update_status( 'on-hold', __( 'Safe2Pay: Payment approved.', 'woocommerce-safe2pay' ) );
 							wc_reduce_stock_levels( $order_id );
 						} else {
-							$order->add_order_note( __( 'Safe2Pay: Payment approved.', 'woocommerce-safe2pay' ) );
+							$order->add_order_note( __( 'Safe2Pay: Autorizado.', 'woocommerce-safe2pay' ) );
 
 							// Changing the order for processing and reduces the stock.
 							$order->payment_complete( sanitize_text_field( (string) $posted->IdTransaction ) );
@@ -511,7 +511,7 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway {
 
 						break;
 					case "5":
-						$order->update_status( 'processing', __( 'Safe2Pay: Payment came into dispute.', 'woocommerce-safe2pay' ) );
+						$order->update_status( 'processing', __( 'Safe2Pay: Em disputa.', 'woocommerce-safe2pay' ) );
 						$this->send_email(
 							/* translators: %s: order number */
 							sprintf( __( 'Payment for order %s came into dispute', 'woocommerce-safe2pay' ), $order->get_order_number() ),
@@ -522,7 +522,7 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway {
 
 						break;
 					case "6":
-						$order->update_status( 'refunded', __( 'Safe2Pay: Payment refunded.', 'woocommerce-safe2pay' ) );
+						$order->update_status( 'refunded', __( 'Safe2Pay: Devolvido.', 'woocommerce-safe2pay' ) );
 						$this->send_email(
 							/* translators: %s: order number */
 							sprintf( __( 'Payment for order %s refunded', 'woocommerce-safe2pay' ), $order->get_order_number() ),
@@ -537,7 +537,7 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway {
 
 						break;
 					case "12":
-						$order->update_status( 'cancelled', __( 'Safe2Pay: Payment canceled.', 'woocommerce-safe2pay' ) );
+						$order->update_status( 'cancelled', __( 'Safe2Pay: Em cancelamento.', 'woocommerce-safe2pay' ) );
 
 						if ( function_exists( 'wc_increase_stock_levels' ) ) {
 							wc_increase_stock_levels( $order_id );
@@ -571,7 +571,7 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway {
 					'type'         => $data['type'],
 					'link'         => $data['link'],
 					'method'       => $data['method'],
-					'walletaddress'         => $data['walletaddress'],
+					'walletaddress'         => isset($data['walletaddress']) ? $data['walletaddress'] : "",
 					'installments' => $data['installments'],
 				), 'woocommerce/safe2pay/', WC_Safe2Pay::get_templates_path()
 			);
@@ -600,7 +600,7 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway {
 					'emails/plain-instructions.php', array(
 						'type'         => $data['type'],
 						'link'         => $data['link'],
-						'walletaddress'         => $data['walletaddress'],
+						'walletaddress'         => isset($data['walletaddress']) ? $data['walletaddress'] : "",
 						'method'       => $data['method'],
 						'installments' => $data['installments'],
 					), 'woocommerce/safe2pay/', WC_Safe2Pay::get_templates_path()
@@ -610,7 +610,7 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway {
 					'emails/html-instructions.php', array(
 						'type'         => $data['type'],
 						'link'         => $data['link'],
-						'walletaddress'=> $data['walletaddress'],
+						'walletaddress'=> isset($data['walletaddress']) ? $data['walletaddress'] : "",
 						'method'       => $data['method'],
 						'installments' => $data['installments'],
 					), 'woocommerce/safe2pay/', WC_Safe2Pay::get_templates_path()

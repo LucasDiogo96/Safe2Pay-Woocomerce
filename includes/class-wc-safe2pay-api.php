@@ -62,7 +62,7 @@ class WC_Safe2Pay_API
 		$protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"], 0, 5)) == 'https' ? 'https' : 'http';
 
 		// return: http://localhost/myproject/
-		return $protocol . '://' . $hostName . $pathInfo['dirname'] . "/" .'wp-json/safe2pay/v2/callback/'.$orderId;
+		return $protocol . '://' . $hostName . $pathInfo['dirname'] . "/" . 'wp-json/safe2pay/v2/callback/'.$orderId;
 	}
 
 	public function GetPaymentMethod($method)
@@ -160,17 +160,13 @@ class WC_Safe2Pay_API
 		$paymentMethod = 0;
 		$PaymentObject = null;
 
-		$Products = [];
-		$order_items = $order->get_items();
-		$i = 0;
-		foreach ($order_items as $product) {
-			$Products[$i++] = array(
-				"Code" => $i,
-				"Description" => $product->get_name(),
-				"Quantity" => $product->get_quantity(),
-				"UnitPrice" => $product->get_total() / $product->get_quantity()
-			);
-		}
+		$payloadProduct = new stdClass();
+		$payloadProduct->Code = 1; // PHP creates  a Warning here
+		$payloadProduct->Description = "Ordem #". $order->get_id();
+		$payloadProduct->Quantity = 1;
+		$payloadProduct->UnitPrice = $order->get_total();
+
+		$Products = array($payloadProduct);
 
 		if ('BOLETO' === strtoupper($method)) {
 
@@ -195,7 +191,6 @@ class WC_Safe2Pay_API
 			$PaymentObject = array(
 				'Symbol' => $posted['safe2pay_currency-type'],
 			);
-			
 		} else if ('DEBITCARD' === strtoupper($method)) {
 			$paymentMethod  = "4";
 			$PaymentObject = array(
@@ -213,7 +208,7 @@ class WC_Safe2Pay_API
 			'Application' => 'Safe2Pay',
 			'PaymentMethod' => $paymentMethod,
 			'PaymentObject' => $PaymentObject,
-			'Reference' => $order->id,
+			'Reference' => $order->get_id(),
 			'Products' => $Products,
 			'Customer' => array(
 				"Name" => $posted['billing_first_name'] . ' ' . $posted['billing_last_name'],
@@ -365,7 +360,6 @@ class WC_Safe2Pay_API
 				} else {
 
 					// $this->gateway->log->add($this->gateway->id, '!');
-
 
 					return array(
 						'url'   => '',
