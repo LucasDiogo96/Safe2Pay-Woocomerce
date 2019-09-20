@@ -79,11 +79,6 @@
 
 			HidePaymentForm($('#safe2pay-payment-methods input[type=radio]:checked').val());
 
-			// // CPF.
-			// $('#safe2pay-card-holder-cpf' ).mask( '000.000.000-00' );
-			// Phone.
-
-
 			var MaskBehavior = function (val) {
 					return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
 				},

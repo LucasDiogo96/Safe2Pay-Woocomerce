@@ -171,7 +171,7 @@ class WC_Safe2Pay_API
 		if ('BOLETO' === strtoupper($method)) {
 
 			$dueDate = new DateTime();
-			$dueDate->add(new DateInterval('P3D'));
+			$dueDate->add(new DateInterval('P'.$this->gateway->GetDueDateDays().'D'));
 
 			$paymentMethod  = "1";
 			$PaymentObject = array(
@@ -205,7 +205,7 @@ class WC_Safe2Pay_API
 		//Monta payload Safe2Pay
 		$payload = array(
 			'IsSandbox' => $IsSandbox,
-			'Application' => 'Safe2Pay',
+			'Application' => 'Woocomerce',
 			'PaymentMethod' => $paymentMethod,
 			'PaymentObject' => $PaymentObject,
 			'Reference' => $order->get_id(),
@@ -217,11 +217,11 @@ class WC_Safe2Pay_API
 				"Email" => $posted['billing_email'],
 				"Address" => array(
 					"Street" => $posted['billing_address_1'],
-					"Number" =>   isset($posted['shipping_number']) ? $posted['shipping_number'] : 'S/N',
-					"District" =>  isset($posted['shipping_neighborhood']) ? $posted['shipping_neighborhood'] : 'Não informado',
+					"Number" =>   isset($posted['billing_number']) ? $posted['billing_number'] : 'S/N',
+					"District" =>  isset($posted['billing_neighborhood']) ? $posted['billing_neighborhood'] : 'Não informado',
 					"ZipCode" => $posted['billing_postcode'],
 					"CityName" =>  $posted['billing_city'],
-					"StateInitials" => $posted['shipping_state'],
+					"StateInitials" => $posted['billing_state'],
 					"CountryName" =>  'BRASIL'
 				)
 			),

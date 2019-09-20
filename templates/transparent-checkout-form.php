@@ -160,7 +160,7 @@ if (!defined('ABSPATH')) {
 
 	<div class="clear"></div>
 
-	<p id="safe2pay-identity-field" class="form-row form-row-first">
+	<p id="safe2pay-identity-field" class="form-row form-row-first" style="margin-bottom: 4%;">
 		<label for="safe2pay-card-cvc">Confirme o seu CPF/CNPJ <span class="required">*</span></label>
 		<input onkeypress="MaskcpfCnpj(this)" id="safe2pay-customer-identity_bankslip" name="billing_cpf" type="tel" autocomplete="off" maxlength="18" style="font-size: 1.5em; padding: 8px;width: 100%; heigth: 100%;" />
 	</p>

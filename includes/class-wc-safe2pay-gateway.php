@@ -94,6 +94,17 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway {
 		return 'yes' === $this->sandbox ? $this->sandbox_token : $this->token;
 	}
 
+		/**
+	 * Get DueDate Days.
+	 *
+	 * @return int
+	 */
+	public function GetDueDateDays() {
+		return  $this->duedate >= 1 ? $this->duedate : 3;
+	}
+
+	
+
 	/**
 	 * Returns a value indicating the the Gateway is available or not. It's called
 	 * automatically by WooCommerce before allowing customers to use the gateway
@@ -244,6 +255,12 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway {
 				'type'    => 'checkbox',
 				'label'   => __( 'Criptomoeda', 'woocommerce-safe2pay' ),
 				'default' => 'yes',
+			),
+			'duedate'       => array(
+				'title'       => __( 'Data de vencimento', 'woocommerce-safe2pay' ),
+				'type'        => 'number',
+				'description' => __( 'Número de dias para vencimento do boleto Bancário.', 'woocommerce-safe2pay' ),
+				'default'     => 3,
 			),
 			'behavior'             => array(
 				'title'       => __( 'Integration Behavior', 'woocommerce-safe2pay' ),
