@@ -19,7 +19,7 @@ Transações de pagamento online devem ser rápidas e simples, sem asteriscos ou
 4. Após instalar e ativar o plug-in, clique em 'configurações' no plugin.
 5. Insira o seu Token e sua Secret Key, você pode consulta-los em https://admin.safe2pay.com.br/configuracao na sessão 'integração'. Em seguida clique em salvar.
 
-![Safe2Pay](https://safe2pay.com.br/static/img/config.png)
+<img src="https://safe2pay.com.br/static/img/config.png" width="400">
 
 ##  Uma experiência rápida e fácil e segura
 
@@ -28,6 +28,8 @@ Quando os clientes usam o Safe2Pay estão contando com uma solução completa em
 ##  Checkout transparente
 
 Os clientes não necessitam sair da loja para finalizar a compra, ignorando formulários on-line, concluindo a operação de forma simples e com alguns cliques, ajudando a aumentar sua conversão de vendas e reduzir o abandono do carrinho de compras.
+
+<img src="https://safe2pay.com.br/static/img/paymentprocess.gif" width="400">
 
 
 ## Informações adicionais / Contato
