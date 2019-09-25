@@ -201,18 +201,21 @@ class WC_Safe2Pay_API
 			);
 		}
 
+		//Get Version
+		$woo = new WooCommerce();
+
 
 		//Monta payload Safe2Pay
 		$payload = array(
 			'IsSandbox' => $IsSandbox,
-			'Application' => 'Woocomerce',
+			'Application' => 'Woocomerce '.$woo->version,
 			'PaymentMethod' => $paymentMethod,
 			'PaymentObject' => $PaymentObject,
 			'Reference' => $order->get_id(),
 			'Products' => $Products,
 			'Customer' => array(
 				"Name" => $posted['billing_first_name'] . ' ' . $posted['billing_last_name'],
-				"Identity" => $posted['billing_cpf'],
+				"Identity" => preg_replace("/[^0-9]/", "",  $posted['billing_cpf']),
 				"Phone" => $posted['billing_phone'],
 				"Email" => $posted['billing_email'],
 				"Address" => array(
