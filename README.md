@@ -29,8 +29,7 @@ Quando os clientes usam o Safe2Pay estão contando com uma solução completa em
 
 Os clientes não necessitam sair da loja para finalizar a compra, ignorando formulários on-line, concluindo a operação de forma simples e com alguns cliques, ajudando a aumentar sua conversão de vendas e reduzir o abandono do carrinho de compras.
 
-<img src="https://safe2pay.com.br/static/img/paymentprocess.gif" alt="Safe2Pay" data-canonical-src="https://safe2pay.com.br/static/img/paymentprocess.gif" style="max-width:100%;height: 350px;">
-
+![Safe2Pay](https://safe2pay.com.br/static/img/paymentprocess.gif)
 
 ## Informações adicionais / Contato
 
