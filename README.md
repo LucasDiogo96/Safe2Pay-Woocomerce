@@ -17,7 +17,7 @@ Transações de pagamento online devem ser rápidas e simples, sem asteriscos ou
 2. Após isso, faça login no painel do WordPress, navegue até o menu Plugins e clique em "Adicionar novo".
 3. Em seguida faça o upload do arquivo e clique em "Instalar agora".
 4. Após instalar e ativar o plug-in, clique em 'configurações' no plugin.
-5. Insira o seu Token e sua Secret Key, você pode consulta-los em https://admin.safe2pay.com.br/configuracao na sessão 'integração'. Em seguida clique em salvar.
+5. Insira o seu **Token** e sua **Secret Key**, você pode consulta-los em https://admin.safe2pay.com.br/configuracao na sessão **integração**. Em seguida clique em salvar.
 
 ![Safe2Pay](https://s2p.hml.safe2pay.com.br/images/woocomerce/config.png)
 
