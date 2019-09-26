@@ -36,7 +36,7 @@ Os clientes não necessitam sair da loja para finalizar a compra, ignorando form
 ## Requisitos
 - PHP versão 5.6 ou superior.
 - WooCommerce versão 2.6.x ou superior.
-- Ter uma conta no Safe2Pay: https://safe2pay.com.br/
+- Ter uma conta no Safe2Pay: [Clique aqui](https://safe2pay.com.br/)
 
 ## Informações adicionais / Contato
 
