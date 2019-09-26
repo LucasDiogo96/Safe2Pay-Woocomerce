@@ -1,5 +1,5 @@
 
-# Woocommerce Plugin
+# Woocommerce Safe2Pay
 
 ![Safe2Pay](https://safe2pay.com.br/static/img/banner-github.png)
 
