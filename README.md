@@ -31,6 +31,9 @@ Os clientes não necessitam sair da loja para finalizar a compra, ignorando form
 
 <img src="https://safe2pay.com.br/static/img/paymentprocess.gif" width="400">
 
+##  Compatibilidade
+
+A extensão do Safe2Pay é compatível com todas as versões do Woocomerce.
 
 ## Informações adicionais / Contato
 
