@@ -19,8 +19,6 @@ Transações de pagamento online devem ser rápidas e simples, sem asteriscos ou
 4. Após instalar e ativar o plug-in, clique em **configurações** no plugin.
 5. Insira o seu **Token** e **Secret Key**, você pode consulta-los em https://admin.safe2pay.com.br/configuracao na menu **Integração**. Em seguida clique em salvar.
 
-<img src="https://safe2pay.com.br/static/img/config.png" width="400">
-
 ##  Uma experiência rápida e fácil e segura
 
 Quando os clientes usam o Safe2Pay estão contando com uma solução completa em pagamentos e 100% segura. O Safe2Pay possui anti-fraude permitindo que suas transações sejam sempre monitoradas ajudando a minimizar riscos e perdas por fraude, simplificando o processo de validação de transações.
@@ -29,11 +27,16 @@ Quando os clientes usam o Safe2Pay estão contando com uma solução completa em
 
 Os clientes não necessitam sair da loja para finalizar a compra, ignorando formulários on-line, concluindo a operação de forma simples e com alguns cliques, ajudando a aumentar sua conversão de vendas e reduzir o abandono do carrinho de compras.
 
-<img src="https://safe2pay.com.br/static/img/paymentprocess.gif" width="400">
+##  Formas de pagamento disponíveis
+ - **Boleto Bancário**
+ - **Cartão de Crédito**
+ - **Cartão de Débito**
+ - **Bitcoin**
 
-##  Compatibilidade
-
-A extensão do Safe2Pay é compatível com todas as versões do Woocomerce.
+## Requisitos
+- PHP versão 5.6 ou superior.
+- WooCommerce versão 2.6.x ou superior.
+- Ter uma conta no Safe2Pay: https://safe2pay.com.br/
 
 ## Informações adicionais / Contato
 
