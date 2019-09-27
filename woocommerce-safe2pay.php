@@ -4,7 +4,7 @@
  * Plugin URI:           https://github.com/LucasDiogo96/Woocomerce-Safe2Pay
  * Description:          Includes Safe2Pay as a payment gateway to WooCommerce.
  * Author:               Lucas Diogo da Silva
- * Version:              1.1
+ * Version:              1.3
  * License:              GPLv3 or later
  * Text Domain:          woo-safe2pay
  * Domain Path:          /languages
