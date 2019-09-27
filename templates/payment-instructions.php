@@ -51,7 +51,7 @@ if (!defined('ABSPATH')) {
 		</div>
 
 		<div style="text-align: center; font-size: 12px;">
-			<span style="">Wallet Address: <?php echo ($walletaddress); ?></span>
+			<span style="">Wallet Address: <?php echo esc_attr(($walletaddress)); ?></span>
 			<br>
 
 		</div>

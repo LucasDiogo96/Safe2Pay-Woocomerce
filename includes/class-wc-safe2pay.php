@@ -28,8 +28,11 @@ class WC_Safe2Pay
 					$order_id = $callback['order_id'];
 
 					$UpdateOrder = array(
-						IdTransaction=>$callback['IdTransaction'],
-						Status=>$callback['TransactionStatus']['Id'],
+						"IdTransaction"=>$callback['IdTransaction'],
+						"Status"=>$callback['TransactionStatus']['Id'],
+						"Message"=> $callback['TransactionStatus']['Name'],
+						"Description"=> $callback['TransactionStatus']['Name'],
+						
 					);
 
 					$object = new stdClass();

@@ -62,7 +62,7 @@ class WC_Safe2Pay_API
 		$protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"], 0, 5)) == 'https' ? 'https' : 'http';
 
 		// return: http://localhost/myproject/
-		return $protocol . '://' . $hostName . $pathInfo['dirname'] . "/" . 'wp-json/safe2pay/v2/callback/'.$orderId;
+		return $protocol . '://' . $hostName . $pathInfo['dirname'] . "/" . 'wp-json/safe2pay/v2/callback/' . $orderId;
 	}
 
 	public function GetPaymentMethod($method)
@@ -75,45 +75,6 @@ class WC_Safe2Pay_API
 		);
 
 		return isset($methods[$method]) ? $methods[$method] : '';
-	}
-
-	public function GetErrorMessage($code)
-	{
-		$code = (string) $code;
-
-		$messages = array(
-			'11013' => __('Please enter with a valid phone number with DDD. Example: (11) 5555-5555.', 'woocommerce-safe2pay'),
-			'11014' => __('Please enter with a valid phone number with DDD. Example: (11) 5555-5555.', 'woocommerce-safe2pay'),
-			'53018' => __('Please enter with a valid phone number with DDD. Example: (11) 5555-5555.', 'woocommerce-safe2pay'),
-			'53019' => __('Please enter with a valid phone number with DDD. Example: (11) 5555-5555.', 'woocommerce-safe2pay'),
-			'53020' => __('Please enter with a valid phone number with DDD. Example: (11) 5555-5555.', 'woocommerce-safe2pay'),
-			'53021' => __('Please enter with a valid phone number with DDD. Example: (11) 5555-5555.', 'woocommerce-safe2pay'),
-			'11017' => __('Please enter with a valid zip code number.', 'woocommerce-safe2pay'),
-			'53022' => __('Please enter with a valid zip code number.', 'woocommerce-safe2pay'),
-			'53023' => __('Please enter with a valid zip code number.', 'woocommerce-safe2pay'),
-			'53053' => __('Please enter with a valid zip code number.', 'woocommerce-safe2pay'),
-			'53054' => __('Please enter with a valid zip code number.', 'woocommerce-safe2pay'),
-			'11164' => __('Please enter with a valid CPF number.', 'woocommerce-safe2pay'),
-			'53110' => '',
-			'53111' => __('Please select a bank to make payment by bank transfer.', 'woocommerce-safe2pay'),
-			'53045' => __('Credit card holder CPF is required.', 'woocommerce-safe2pay'),
-			'53047' => __('Credit card holder birthdate is required.', 'woocommerce-safe2pay'),
-			'53042' => __('Credit card holder name is required.', 'woocommerce-safe2pay'),
-			'53049' => __('Credit card holder phone is required.', 'woocommerce-safe2pay'),
-			'53051' => __('Credit card holder phone is required.', 'woocommerce-safe2pay'),
-			'11020' => __('The address complement is too long, it cannot be more than 40 characters.', 'woocommerce-safe2pay'),
-			'53028' => __('The address complement is too long, it cannot be more than 40 characters.', 'woocommerce-safe2pay'),
-			'53029' => __('<strong>Neighborhood</strong> is a required field.', 'woocommerce-safe2pay'),
-			'53046' => __('Credit card holder CPF invalid.', 'woocommerce-safe2pay'),
-			'53122' => __('Invalid email domain. You must use an email @sandbox.safe2pay.com.br while you are using the Safe2Pay Sandbox.', 'woocommerce-safe2pay'),
-			'53081' => __('The customer email can not be the same as the Safe2Pay account owner.', 'woocommerce-safe2pay'),
-		);
-
-		if (isset($messages[$code])) {
-			return $messages[$code];
-		}
-
-		return __('An error has occurred while processing your payment, please review your data and try again. Or contact us for assistance.', 'woocommerce-safe2pay');
 	}
 
 	protected function GetAvailablePaymentMethods()
@@ -157,74 +118,89 @@ class WC_Safe2Pay_API
 
 		//Metodo de pagamento
 		$method  = isset($posted['safe2pay_payment_method']) ? $this->GetPaymentMethod($posted['safe2pay_payment_method']) : '';
-		$paymentMethod = 0;
-		$PaymentObject = null;
-
-		$payloadProduct = new stdClass();
-		$payloadProduct->Code = 1; // PHP creates  a Warning here
-		$payloadProduct->Description = "Ordem #". $order->get_id();
-		$payloadProduct->Quantity = 1;
-		$payloadProduct->UnitPrice = $order->get_total();
-
-		$Products = array($payloadProduct);
-
-		if ('BOLETO' === strtoupper($method)) {
-
-			$dueDate = new DateTime();
-			$dueDate->add(new DateInterval('P'.$this->gateway->GetDueDateDays().'D'));
-
-			$paymentMethod  = "1";
-			$PaymentObject = array(
-				"DueDate"   => $dueDate->format('Y-m-d')
-			);
-		} else if ('CREDITCARD' === strtoupper($method)) {
-			$paymentMethod  = "2";
-			$PaymentObject = array(
-				'Holder' => $posted['safe2pay-card-holder-name'],
-				'CardNumber' => $posted['safe2pay-card-number'],
-				'ExpirationDate' => $posted['safe2pay-card-expiry-field'],
-				'SecurityCode' => $posted['safe2pay-card-cvc'],
-				'InstallmentQuantity' => $posted['safe2pay-card-installments']
-			);
-		} else if ('CRYPTOCURRENCY' === strtoupper($method)) {
-			$paymentMethod  = "3";
-			$PaymentObject = array(
-				'Symbol' => $posted['safe2pay_currency-type'],
-			);
-		} else if ('DEBITCARD' === strtoupper($method)) {
-			$paymentMethod  = "4";
-			$PaymentObject = array(
-				'Holder' => $posted['safe2pay-debit-card-holder-name'],
-				'CardNumber' => $posted['safe2pay-debit-card-number'],
-				'ExpirationDate' => $posted['safe2pay-debit-card-expiry'],
-				'SecurityCode' => $posted['safe2pay-debit-card-cvc']
-			);
-		}
-
 		//Get Version
 		$woo = new WooCommerce();
+		//PaymentMethod Code
+		$paymentMethod = 0;
+		//PaymentMethod Object
+		$PaymentObject = null;
 
+		//Produto do payload
+		$Products = array(
+			(object) array(
+				'Code' => 1,
+				'Description' => "Ordem #" . $order->get_id(),
+				'Quantity' => 1,
+				'UnitPrice' => $order->get_total()
+			)
+		);
+
+		switch (strtoupper($method)) {
+			case 'BOLETO':
+
+				$paymentMethod  = "1";
+				$PaymentObject = $this->gateway->GetBankSlipConfig();
+
+				break;
+			case 'CREDITCARD':
+				$paymentMethod  = "2";
+
+				$PaymentObject = array(
+					'Holder' => sanitize_text_field($posted['safe2pay-card-holder-name']),
+					'CardNumber' => sanitize_text_field($posted['safe2pay-card-number']),
+					'ExpirationDate' => sanitize_text_field($posted['safe2pay-card-expiry-field']),
+					'SecurityCode' => sanitize_text_field($posted['safe2pay-card-cvc']),
+					'InstallmentQuantity' => sanitize_text_field($posted['safe2pay-card-installments'])
+				);
+
+				break;
+			case 'CRYPTOCURRENCY':
+				$paymentMethod  = "3";
+
+				$PaymentObject = array(
+					'Symbol' => sanitize_text_field($posted['safe2pay_currency-type']),
+				);
+
+				break;
+			case 'DEBITCARD':
+				$paymentMethod  = "4";
+
+				$PaymentObject = array(
+					'Holder' => sanitize_text_field($posted['safe2pay-debit-card-holder-name']),
+					'CardNumber' => sanitize_text_field($posted['safe2pay-debit-card-number']),
+					'ExpirationDate' => sanitize_text_field($posted['safe2pay-debit-card-expiry']),
+					'SecurityCode' => sanitize_text_field($posted['safe2pay-debit-card-cvc'])
+				);
+
+				break;
+			default:
+				return array(
+					'url'   => '',
+					'data'  => '',
+					'error' => 'Método de pagamento não selecionado',
+				);
+		};
 
 		//Monta payload Safe2Pay
 		$payload = array(
 			'IsSandbox' => $IsSandbox,
-			'Application' => 'Woocomerce '.$woo->version,
+			'Application' => 'Woocomerce ' . $woo->version,
 			'PaymentMethod' => $paymentMethod,
 			'PaymentObject' => $PaymentObject,
 			'Reference' => $order->get_id(),
 			'Products' => $Products,
 			'Customer' => array(
-				"Name" => $posted['billing_first_name'] . ' ' . $posted['billing_last_name'],
-				"Identity" => preg_replace("/[^0-9]/", "",  $posted['billing_cpf']),
-				"Phone" => $posted['billing_phone'],
-				"Email" => $posted['billing_email'],
+				"Name" => sanitize_text_field($posted['billing_first_name'] . ' ' . $posted['billing_last_name']),
+				"Identity" => sanitize_text_field(preg_replace("/[^0-9]/", "",  $posted['billing_cpf'])),
+				"Phone" => sanitize_text_field($posted['billing_phone']),
+				"Email" => sanitize_text_field($posted['billing_email']),
 				"Address" => array(
-					"Street" => $posted['billing_address_1'],
-					"Number" =>   isset($posted['billing_number']) ? $posted['billing_number'] : 'S/N',
-					"District" =>  isset($posted['billing_neighborhood']) ? $posted['billing_neighborhood'] : 'Não informado',
-					"ZipCode" => $posted['billing_postcode'],
-					"CityName" =>  $posted['billing_city'],
-					"StateInitials" => $posted['billing_state'],
+					"Street" => sanitize_text_field($posted['billing_address_1']),
+					"Number" =>   sanitize_text_field(isset($posted['billing_number']) ? $posted['billing_number'] : 'S/N'),
+					"District" =>  sanitize_text_field(isset($posted['billing_neighborhood']) ? $posted['billing_neighborhood'] : 'Não informado'),
+					"ZipCode" => sanitize_text_field($posted['billing_postcode']),
+					"CityName" =>  sanitize_text_field($posted['billing_city']),
+					"StateInitials" => sanitize_text_field($posted['billing_state']),
 					"CountryName" =>  'BRASIL'
 				)
 			),
@@ -269,7 +245,6 @@ class WC_Safe2Pay_API
 					if ('yes' == $this->gateway->debug) {
 						$this->gateway->log->add($this->gateway->id, 'Transação efetuada com sucesso!');
 					}
-
 
 					return array(
 						'url'   => $this->GetPaymentURI(),
@@ -330,7 +305,7 @@ class WC_Safe2Pay_API
 
 		if (is_wp_error($response)) {
 			if ('yes' == $this->gateway->debug) {
-				$this->gateway->log->add($this->gateway->id, 'WP_Error in requesting the direct payment: ' . $response->GetErrorMessage());
+				$this->gateway->log->add($this->gateway->id, 'WP_Error in requesting the direct payment:');
 			}
 		} else if (401 === $response['response']['code']) {
 			if ('yes' == $this->gateway->debug) {
@@ -349,7 +324,7 @@ class WC_Safe2Pay_API
 
 
 				if ($response->HasError == false) {
-					if($response->ResponseDetail->Status == 8){
+					if ($response->ResponseDetail->Status == 8) {
 						return array(
 							'url'   => '',
 							'data'  => '',
