@@ -25,9 +25,9 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway
 	{
 		$this->id                 = 'safe2pay';
 		$this->icon               = apply_filters('woocommerce_safe2pay_icon', plugins_url('assets/images/safe2pay.png', plugin_dir_path(__FILE__)));
-		$this->method_title       = __('Safe2Pay', 'woocommerce-safe2pay');
-		$this->method_description = __('Accept payments by credit card, bank debit or banking ticket using the Safe2Pay.', 'woocommerce-safe2pay');
-		$this->order_button_text  = __('Finalizar', 'woocommerce-safe2pay');
+		$this->method_title       = __('Safe2Pay', 'woo-safe2pay');
+		$this->method_description = __('Accept payments by credit card, bank debit or banking ticket using the Safe2Pay.', 'woo-safe2pay');
+		$this->order_button_text  = __('Finalizar', 'woo-safe2pay');
 
 		// Load the form fields.
 		$this->init_form_fields();
@@ -187,12 +187,12 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway
 					'safe2pay-checkout',
 					'wc_safe2pay_params',
 					array(
-						'interest_free'      => __('interest free', 'woocommerce-safe2pay'),
-						'invalid_card'       => __('Invalid credit card number.', 'woocommerce-safe2pay'),
-						'invalid_expiry'     => __('Invalid expiry date, please use the MM / YYYY date format.', 'woocommerce-safe2pay'),
-						'expired_date'       => __('Please check the expiry date and use a valid format as MM / YYYY.', 'woocommerce-safe2pay'),
-						'general_error'      => __('Unable to process the data from your credit card on the Safe2Pay, please try again or contact us for assistance.', 'woocommerce-safe2pay'),
-						'empty_installments' => __('Select a number of installments.', 'woocommerce-safe2pay'),
+						'interest_free'      => __('interest free', 'woo-safe2pay'),
+						'invalid_card'       => __('Invalid credit card number.', 'woo-safe2pay'),
+						'invalid_expiry'     => __('Invalid expiry date, please use the MM / YYYY date format.', 'woo-safe2pay'),
+						'expired_date'       => __('Please check the expiry date and use a valid format as MM / YYYY.', 'woo-safe2pay'),
+						'general_error'      => __('Unable to process the data from your credit card on the Safe2Pay, please try again or contact us for assistance.', 'woo-safe2pay'),
+						'empty_installments' => __('Select a number of installments.', 'woo-safe2pay'),
 					)
 				);
 			}
@@ -202,7 +202,7 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway
 	protected function get_log_view()
 	{
 		if (defined('WC_VERSION') && version_compare(WC_VERSION, '2.2', '>=')) {
-			return '<a href="' . esc_url(admin_url('admin.php?page=wc-status&tab=logs&log_file=' . esc_attr($this->id) . '-' . sanitize_file_name(wp_hash($this->id)) . '.log')) . '">' . __('System Status &gt; Logs', 'woocommerce-safe2pay') . '</a>';
+			return '<a href="' . esc_url(admin_url('admin.php?page=wc-status&tab=logs&log_file=' . esc_attr($this->id) . '-' . sanitize_file_name(wp_hash($this->id)) . '.log')) . '">' . __('System Status &gt; Logs', 'woo-safe2pay') . '</a>';
 		}
 
 		return '<code>woocommerce/logs/' . esc_attr($this->id) . '-' . sanitize_file_name(wp_hash($this->id)) . '.txt</code>';
@@ -212,183 +212,183 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway
 	{
 		$this->form_fields = array(
 			'enabled'              => array(
-				'title'   => __('Ativar/Desativar', 'woocommerce-safe2pay'),
+				'title'   => __('Ativar/Desativar', 'woo-safe2pay'),
 				'type'    => 'checkbox',
-				'label'   => __('Ativar Safe2Pay', 'woocommerce-safe2pay'),
+				'label'   => __('Ativar Safe2Pay', 'woo-safe2pay'),
 				'default' => 'yes',
 			),
 			'title'                => array(
-				'title'       => __('Título', 'woocommerce-safe2pay'),
+				'title'       => __('Título', 'woo-safe2pay'),
 				'type'        => 'text',
-				'description' => __('Título do método de pagamento', 'woocommerce-safe2pay'),
+				'description' => __('Título do método de pagamento', 'woo-safe2pay'),
 				'desc_tip'    => true,
-				'default'     => __('Safe2Pay', 'woocommerce-safe2pay'),
+				'default'     => __('Safe2Pay', 'woo-safe2pay'),
 			),
 			'description'          => array(
-				'title'       => __('Descrição do método de pagamento', 'woocommerce-safe2pay'),
+				'title'       => __('Descrição do método de pagamento', 'woo-safe2pay'),
 				'type'        => 'textarea',
-				'description' => __('Descrição do método de pagamento durante o checkout.', 'woocommerce-safe2pay'),
-				'default'     => __('Pagar via Safe2Pay', 'woocommerce-safe2pay'),
+				'description' => __('Descrição do método de pagamento durante o checkout.', 'woo-safe2pay'),
+				'default'     => __('Pagar via Safe2Pay', 'woo-safe2pay'),
 			),
 			'integration'          => array(
-				'title'       => __('Integração', 'woocommerce-safe2pay'),
+				'title'       => __('Integração', 'woo-safe2pay'),
 				'type'        => 'title',
 				'description' => '',
 			),
 			'method'               => array(
-				'title'       => __('Método de integração', 'woocommerce-safe2pay'),
+				'title'       => __('Método de integração', 'woo-safe2pay'),
 				'type'        => 'select',
-				'description' => __('Choose how the customer will interact with the Safe2Pay. Redirect (Client goes to Safe2Pay page) or Lightbox (Inside your store)', 'woocommerce-safe2pay'),
+				'description' => __('Choose how the customer will interact with the Safe2Pay. Redirect (Client goes to Safe2Pay page) or Lightbox (Inside your store)', 'woo-safe2pay'),
 				'desc_tip'    => true,
 				'default'     => 'direct',
 				'class'       => 'wc-enhanced-select',
 				'options'     => array(
-					'transparent' => __('Transparent Checkout', 'woocommerce-safe2pay'),
+					'transparent' => __('Transparent Checkout', 'woo-safe2pay'),
 				),
 			),
 			'sandbox'              => array(
-				'title'       => __('Safe2Pay Sandbox', 'woocommerce-safe2pay'),
+				'title'       => __('Safe2Pay Sandbox', 'woo-safe2pay'),
 				'type'        => 'checkbox',
-				'label'       => __('Ativar/Desativar Safe2Pay Sandbox', 'woocommerce-safe2pay'),
+				'label'       => __('Ativar/Desativar Safe2Pay Sandbox', 'woo-safe2pay'),
 				'desc_tip'    => true,
 				'default'     => 'no',
-				'description' => __('Safe2Pay Sandbox pode ser utilizado para testes de pagamento.', 'woocommerce-safe2pay'),
+				'description' => __('Safe2Pay Sandbox pode ser utilizado para testes de pagamento.', 'woo-safe2pay'),
 			),
 			'token'                => array(
-				'title'       => __('Safe2Pay Token', 'woocommerce-safe2pay'),
+				'title'       => __('Safe2Pay Token', 'woo-safe2pay'),
 				'type'        => 'text',
 				/* translators: %s: link to Safe2Pay settings */
-				'description' => sprintf(__('Insira seu Token aqui. Isso é necessário para processar os pagamentos.', 'woocommerce-safe2pay'), '<a href="https://admin.safe2pay.com.br/integracao">' . __('here', 'woocommerce-safe2pay') . '</a>'),
+				'description' => sprintf(__('Insira seu Token aqui. Isso é necessário para processar os pagamentos.', 'woo-safe2pay'), '<a href="https://admin.safe2pay.com.br/integracao">' . __('here', 'woo-safe2pay') . '</a>'),
 				'default'     => '',
 			),
 			'secretkey'                => array(
-				'title'       => __('Safe2Pay SecretKey', 'woocommerce-safe2pay'),
+				'title'       => __('Safe2Pay SecretKey', 'woo-safe2pay'),
 				'type'        => 'text',
 				/* translators: %s: link to Safe2Pay settings */
-				'description' => sprintf(__('Insira sua Secret Key aqui. Isso é necessário para receber notificações de mudanças de status do pagamento.', 'woocommerce-safe2pay'), '<a href="https://admin.safe2pay.com.br/integracao">' . __('here', 'woocommerce-safe2pay') . '</a>'),
+				'description' => sprintf(__('Insira sua Secret Key aqui. Isso é necessário para receber notificações de mudanças de status do pagamento.', 'woo-safe2pay'), '<a href="https://admin.safe2pay.com.br/integracao">' . __('here', 'woo-safe2pay') . '</a>'),
 				'default'     => '',
 			),
 			'sandbox_token'        => array(
-				'title'       => __('Safe2Pay Sandbox Token', 'woocommerce-safe2pay'),
+				'title'       => __('Safe2Pay Sandbox Token', 'woo-safe2pay'),
 				'type'        => 'text',
 				/* translators: %s: link to Safe2Pay settings */
-				'description' => sprintf(__('Insira seu Token de Sandbox aqui. Isso é necessário para processar os pagamentos em ambiente de teste.', 'woocommerce-safe2pay'), '<a href=https://admin.safe2pay.com.br/integracao">' . __('here', 'woocommerce-safe2pay') . '</a>'),
+				'description' => sprintf(__('Insira seu Token de Sandbox aqui. Isso é necessário para processar os pagamentos em ambiente de teste.', 'woo-safe2pay'), '<a href=https://admin.safe2pay.com.br/integracao">' . __('here', 'woo-safe2pay') . '</a>'),
 				'default'     => '',
 			),
 			'sandbox_secretkey'                => array(
-				'title'       => __('Safe2Pay Sandbox SecretKey', 'woocommerce-safe2pay'),
+				'title'       => __('Safe2Pay Sandbox SecretKey', 'woo-safe2pay'),
 				'type'        => 'text',
 				/* translators: %s: link to Safe2Pay settings */
-				'description' => sprintf(__('Insira sua Secret Key de Sandbox aqui. Isso é necessário para receber notificações de mudança de status do pagamento em ambiente de teste.', 'woocommerce-safe2pay'), '<a href="https://admin.safe2pay.com.br/integracao">' . __('here', 'woocommerce-safe2pay') . '</a>'),
+				'description' => sprintf(__('Insira sua Secret Key de Sandbox aqui. Isso é necessário para receber notificações de mudança de status do pagamento em ambiente de teste.', 'woo-safe2pay'), '<a href="https://admin.safe2pay.com.br/integracao">' . __('here', 'woo-safe2pay') . '</a>'),
 				'default'     => '',
 			),
 			'transparent_checkout' => array(
-				'title'       => __('Opções de pagamento', 'woocommerce-safe2pay'),
+				'title'       => __('Opções de pagamento', 'woo-safe2pay'),
 				'type'        => 'title',
 				'description' => '',
 			),
 			'tc_ticket'            => array(
-				'title'   => __('Boleto Bancário', 'woocommerce-safe2pay'),
+				'title'   => __('Boleto Bancário', 'woo-safe2pay'),
 				'type'    => 'checkbox',
-				'label'   => __('Boleto Bancário', 'woocommerce-safe2pay'),
+				'label'   => __('Boleto Bancário', 'woo-safe2pay'),
 				'default' => 'yes',
 			),
 			'duedate'       => array(
-				'title'       => __('Data de vencimento', 'woocommerce-safe2pay'),
+				'title'       => __('Data de vencimento', 'woo-safe2pay'),
 				'type'        => 'number',
-				'description' => __('Número de dias para vencimento do boleto Bancário.', 'woocommerce-safe2pay'),
+				'description' => __('Número de dias para vencimento do boleto Bancário.', 'woo-safe2pay'),
 				'default'     => 3,
 			),
 			'instruction'       => array(
-				'title'       => __('Instrução', 'woocommerce-safe2pay'),
+				'title'       => __('Instrução', 'woo-safe2pay'),
 				'type'        => 'text',
-				'description' => __('Instrução do boleto bancário.', 'woocommerce-safe2pay'),
+				'description' => __('Instrução do boleto bancário.', 'woo-safe2pay'),
 				'default'     => '',
 			),
 			'message1'       => array(
-				'title'       => __('Mensagem 1', 'woocommerce-safe2pay'),
+				'title'       => __('Mensagem 1', 'woo-safe2pay'),
 				'type'        => 'text',
-				'description' => __('Mensagem 1 impressa no boleto bancário.', 'woocommerce-safe2pay'),
+				'description' => __('Mensagem 1 impressa no boleto bancário.', 'woo-safe2pay'),
 				'default'     => '',
 			),
 			'message2'       => array(
-				'title'       => __('Mensagem 2', 'woocommerce-safe2pay'),
+				'title'       => __('Mensagem 2', 'woo-safe2pay'),
 				'type'        => 'text',
-				'description' => __('Mensagem 3 impressa no boleto bancário.', 'woocommerce-safe2pay'),
+				'description' => __('Mensagem 3 impressa no boleto bancário.', 'woo-safe2pay'),
 				'default'     => '',
 			),
 			'message3'       => array(
-				'title'       => __('Mensagem 3', 'woocommerce-safe2pay'),
+				'title'       => __('Mensagem 3', 'woo-safe2pay'),
 				'type'        => 'text',
-				'description' => __('Mensagem 3 impressa no boleto bancário.', 'woocommerce-safe2pay'),
+				'description' => __('Mensagem 3 impressa no boleto bancário.', 'woo-safe2pay'),
 				'default'     => '',
 			),
 			'cancelAfterDue'       => array(
-				'title'       => __('Cancelar após o vencimento', 'woocommerce-safe2pay'),
+				'title'       => __('Cancelar após o vencimento', 'woo-safe2pay'),
 				'type'        => 'checkbox',
-				'description' => __('Cancelar boleto bancário após o vencimento.', 'woocommerce-safe2pay'),
+				'description' => __('Cancelar boleto bancário após o vencimento.', 'woo-safe2pay'),
 				'default'     => false,
 			),
 			'isEnablePartialPayment'       => array(
-				'title'       => __('Pagamento parcial', 'woocommerce-safe2pay'),
+				'title'       => __('Pagamento parcial', 'woo-safe2pay'),
 				'type'        => 'checkbox',
-				'description' => __('Aceitar pagamento parcial do boleto bancário', 'woocommerce-safe2pay'),
+				'description' => __('Aceitar pagamento parcial do boleto bancário', 'woo-safe2pay'),
 				'default'     => false,
 			),
 			'interestRate'       => array(
-				'title'       => __('Taxa de juros', 'woocommerce-safe2pay'),
+				'title'       => __('Taxa de juros', 'woo-safe2pay'),
 				'type'        => 'number',
-				'description' => __('Juros aplicado após o vencimento do boleto bancário.', 'woocommerce-safe2pay'),
+				'description' => __('Juros aplicado após o vencimento do boleto bancário.', 'woo-safe2pay'),
 				'default'     => '',
 			),
 			'penaltyRate'       => array(
-				'title'       => __('Taxa de multa', 'woocommerce-safe2pay'),
+				'title'       => __('Taxa de multa', 'woo-safe2pay'),
 				'type'        => 'number',
-				'description' => __('Multa aplicada após o vencimento do boleto bancário.', 'woocommerce-safe2pay'),
+				'description' => __('Multa aplicada após o vencimento do boleto bancário.', 'woo-safe2pay'),
 				'default'     => '',
 			),
 			'tc_credit'            => array(
-				'title'   => __('Cartão de Crédito', 'woocommerce-safe2pay'),
+				'title'   => __('Cartão de Crédito', 'woo-safe2pay'),
 				'type'    => 'checkbox',
-				'label'   => __('Cartão de crédito', 'woocommerce-safe2pay'),
+				'label'   => __('Cartão de crédito', 'woo-safe2pay'),
 				'default' => 'no',
 			),
 			'tc_debit'            => array(
-				'title'   => __('Cartão de Débito', 'woocommerce-safe2pay'),
+				'title'   => __('Cartão de Débito', 'woo-safe2pay'),
 				'type'    => 'checkbox',
-				'label'   => __('Cartão de débito', 'woocommerce-safe2pay'),
+				'label'   => __('Cartão de débito', 'woo-safe2pay'),
 				'default' => 'no',
 			),
 			'tc_cryptocurrency'            => array(
-				'title'   => __('Criptomoedas', 'woocommerce-safe2pay'),
+				'title'   => __('Criptomoedas', 'woo-safe2pay'),
 				'type'    => 'checkbox',
-				'label'   => __('Criptomoeda', 'woocommerce-safe2pay'),
+				'label'   => __('Criptomoeda', 'woo-safe2pay'),
 				'default' => 'no',
 			),
 			'behavior'             => array(
-				'title'       => __('Integration Behavior', 'woocommerce-safe2pay'),
+				'title'       => __('Integration Behavior', 'woo-safe2pay'),
 				'type'        => 'title',
 				'description' => '',
 			),
 			'invoice_prefix'       => array(
-				'title'       => __('Invoice Prefix', 'woocommerce-safe2pay'),
+				'title'       => __('Invoice Prefix', 'woo-safe2pay'),
 				'type'        => 'text',
-				'description' => __('Please enter a prefix for your invoice numbers. If you use your Safe2Pay account for multiple stores ensure this prefix is unqiue as Safe2Pay will not allow orders with the same invoice number.', 'woocommerce-safe2pay'),
+				'description' => __('Please enter a prefix for your invoice numbers. If you use your Safe2Pay account for multiple stores ensure this prefix is unqiue as Safe2Pay will not allow orders with the same invoice number.', 'woo-safe2pay'),
 				'desc_tip'    => true,
 				'default'     => 'WC-',
 			),
 			'testing'              => array(
-				'title'       => __('Gateway Testing', 'woocommerce-safe2pay'),
+				'title'       => __('Gateway Testing', 'woo-safe2pay'),
 				'type'        => 'title',
 				'description' => '',
 			),
 			'debug'                => array(
-				'title'       => __('Debug Log', 'woocommerce-safe2pay'),
+				'title'       => __('Debug Log', 'woo-safe2pay'),
 				'type'        => 'checkbox',
-				'label'       => __('Enable logging', 'woocommerce-safe2pay'),
+				'label'       => __('Enable logging', 'woo-safe2pay'),
 				'default'     => 'no',
 				/* translators: %s: log page link */
-				'description' => sprintf(__('Log Safe2Pay events, such as API requests, inside %s', 'woocommerce-safe2pay'), $this->get_log_view()),
+				'description' => sprintf(__('Log Safe2Pay events, such as API requests, inside %s', 'woo-safe2pay'), $this->get_log_view()),
 			),
 		);
 	}
@@ -534,19 +534,19 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway
 		);
 
 		if ($posted->IdTransaction != null) {
-			$meta_data[__('Código da transação', 'woocommerce-safe2pay')] = sanitize_text_field((string) $posted->IdTransaction);
+			$meta_data[__('Código da transação', 'woo-safe2pay')] = sanitize_text_field((string) $posted->IdTransaction);
 		}
 		if ($posted->Message != null) {
-			$meta_data[__('Status', 'woocommerce-safe2pay')] = sanitize_text_field((string) $posted->Message);
+			$meta_data[__('Status', 'woo-safe2pay')] = sanitize_text_field((string) $posted->Message);
 		}
 		if ($posted->Description != null) {
-			$meta_data[__('Descrição', 'woocommerce-safe2pay')] = sanitize_text_field((string) $posted->Description);
+			$meta_data[__('Descrição', 'woo-safe2pay')] = sanitize_text_field((string) $posted->Description);
 		}
 		if ($order->Data['billing']['email'] != null) {
-			$meta_data[__('Email', 'woocommerce-safe2pay')] = sanitize_text_field($order->Data['billing']['email']);
+			$meta_data[__('Email', 'woo-safe2pay')] = sanitize_text_field($order->Data['billing']['email']);
 		}
 		if ($order->Data['billing']['first_name'] != null) {
-			$meta_data[__('Nome', 'woocommerce-safe2pay')] = sanitize_text_field($order->Data['billing']['first_name'] . ' ' . $order->Data['billing']['last_name']);
+			$meta_data[__('Nome', 'woo-safe2pay')] = sanitize_text_field($order->Data['billing']['first_name'] . ' ' . $order->Data['billing']['last_name']);
 		}
 
 		$method = sanitize_text_field(strtoupper($_POST['safe2pay_payment_method']));
@@ -558,12 +558,12 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway
 
 				if ($posted->BankSlipUrl != null) {
 					$payment_data['link'] = sanitize_text_field((string) $posted->BankSlipUrl);
-					$meta_data[__('URL Boleto', 'woocommerce-safe2pay')] = sanitize_text_field((string) $posted->BankSlipUrl);
-					$meta_data[__('Número Boleto', 'woocommerce-safe2pay')] = sanitize_text_field((string) $posted->BankSlipNumber);
-					$meta_data[__('Código de Barras', 'woocommerce-safe2pay')] = sanitize_text_field((string) $posted->Barcode);
-					$meta_data[__('Data de Vencimento', 'woocommerce-safe2pay')] = sanitize_text_field((string) $posted->DueDate);
-					$meta_data[__('Linha Digitável', 'woocommerce-safe2pay')] = sanitize_text_field((string) $posted->DigitableLine);
-					$meta_data[__('Data da Operação', 'woocommerce-safe2pay')] = sanitize_text_field((string) $posted->OperationDate);
+					$meta_data[__('URL Boleto', 'woo-safe2pay')] = sanitize_text_field((string) $posted->BankSlipUrl);
+					$meta_data[__('Número Boleto', 'woo-safe2pay')] = sanitize_text_field((string) $posted->BankSlipNumber);
+					$meta_data[__('Código de Barras', 'woo-safe2pay')] = sanitize_text_field((string) $posted->Barcode);
+					$meta_data[__('Data de Vencimento', 'woo-safe2pay')] = sanitize_text_field((string) $posted->DueDate);
+					$meta_data[__('Linha Digitável', 'woo-safe2pay')] = sanitize_text_field((string) $posted->DigitableLine);
+					$meta_data[__('Data da Operação', 'woo-safe2pay')] = sanitize_text_field((string) $posted->OperationDate);
 				}
 
 				break;
@@ -572,7 +572,7 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway
 				$payment_data['type'] = '2';
 
 				$payment_data['installments'] = sanitize_text_field($_POST['safe2pay_card_installments']);
-				$meta_data[__('Parcelas', 'woocommerce-safe2pay')] = $payment_data['installments'];
+				$meta_data[__('Parcelas', 'woo-safe2pay')] = $payment_data['installments'];
 
 				break;
 			case "CRYPTO-CURRENCY":
@@ -580,10 +580,10 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway
 				$payment_data['type'] = '3';
 
 				$payment_data['link'] = sanitize_text_field((string)  $posted->QrCode);
-				$meta_data[__('Payment URL', 'woocommerce-safe2pay')] = $payment_data['link'];
+				$meta_data[__('Payment URL', 'woo-safe2pay')] = $payment_data['link'];
 
 				$payment_data['walletaddress'] = sanitize_text_field((string)  $posted->WalletAddress);
-				$meta_data[__('WalletAddress', 'woocommerce-safe2pay')] = $payment_data['walletaddress'];
+				$meta_data[__('WalletAddress', 'woo-safe2pay')] = $payment_data['walletaddress'];
 
 				break;
 
@@ -633,11 +633,11 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway
 
 				switch ($posted->Status) {
 					case "1":
-						$order->update_status('pending', __('Safe2Pay: Pendente.', 'woocommerce-safe2pay'));
+						$order->update_status('pending', __('Safe2Pay: Pendente.', 'woo-safe2pay'));
 
 						break;
 					case "2":
-						$order->update_status('processing', __('Safe2Pay: Processamento.', 'woocommerce-safe2pay'));
+						$order->update_status('processing', __('Safe2Pay: Processamento.', 'woo-safe2pay'));
 
 						// Reduce stock for billets.
 						if (function_exists('wc_reduce_stock_levels')) {
@@ -648,10 +648,10 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway
 					case "3":
 						// Sometimes Safe2Pay should change an order from cancelled to paid, so we need to handle it.
 						if (method_exists($order, 'get_status') && 'cancelled' === $order->get_status()) {
-							$order->update_status('on-hold', __('Safe2Pay: Payment approved.', 'woocommerce-safe2pay'));
+							$order->update_status('on-hold', __('Safe2Pay: Payment approved.', 'woo-safe2pay'));
 							wc_reduce_stock_levels($order_id);
 						} else {
-							$order->add_order_note(__('Safe2Pay: Autorizado.', 'woocommerce-safe2pay'));
+							$order->add_order_note(__('Safe2Pay: Autorizado.', 'woo-safe2pay'));
 
 							// Changing the order for processing and reduces the stock.
 							$order->payment_complete(sanitize_text_field((string) $posted->IdTransaction));
@@ -659,24 +659,24 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway
 
 						break;
 					case "5":
-						$order->update_status('processing', __('Safe2Pay: Em disputa.', 'woocommerce-safe2pay'));
+						$order->update_status('processing', __('Safe2Pay: Em disputa.', 'woo-safe2pay'));
 						$this->send_email(
 							/* translators: %s: order number */
-							sprintf(__('Payment for order %s came into dispute', 'woocommerce-safe2pay'), $order->get_order_number()),
-							__('Payment in dispute', 'woocommerce-safe2pay'),
+							sprintf(__('Payment for order %s came into dispute', 'woo-safe2pay'), $order->get_order_number()),
+							__('Payment in dispute', 'woo-safe2pay'),
 							/* translators: %s: order number */
-							sprintf(__('Order %s has been marked as on-hold, because the payment came into dispute in Safe2Pay.', 'woocommerce-safe2pay'), $order->get_order_number())
+							sprintf(__('Order %s has been marked as on-hold, because the payment came into dispute in Safe2Pay.', 'woo-safe2pay'), $order->get_order_number())
 						);
 
 						break;
 					case "6":
-						$order->update_status('refunded', __('Safe2Pay: Devolvido.', 'woocommerce-safe2pay'));
+						$order->update_status('refunded', __('Safe2Pay: Devolvido.', 'woo-safe2pay'));
 						$this->send_email(
 							/* translators: %s: order number */
-							sprintf(__('Payment for order %s refunded', 'woocommerce-safe2pay'), $order->get_order_number()),
-							__('Payment refunded', 'woocommerce-safe2pay'),
+							sprintf(__('Payment for order %s refunded', 'woo-safe2pay'), $order->get_order_number()),
+							__('Payment refunded', 'woo-safe2pay'),
 							/* translators: %s: order number */
-							sprintf(__('Order %s has been marked as refunded by Safe2Pay.', 'woocommerce-safe2pay'), $order->get_order_number())
+							sprintf(__('Order %s has been marked as refunded by Safe2Pay.', 'woo-safe2pay'), $order->get_order_number())
 						);
 
 						if (function_exists('wc_increase_stock_levels')) {
@@ -685,7 +685,7 @@ class WC_Safe2Pay_Gateway extends WC_Payment_Gateway
 
 						break;
 					case "12":
-						$order->update_status('cancelled', __('Safe2Pay: Em cancelamento.', 'woocommerce-safe2pay'));
+						$order->update_status('cancelled', __('Safe2Pay: Em cancelamento.', 'woo-safe2pay'));
 
 						if (function_exists('wc_increase_stock_levels')) {
 							wc_increase_stock_levels($order_id);

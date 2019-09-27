@@ -6,7 +6,7 @@
  * Author:               Lucas Diogo da Silva
  * Version:              1.1
  * License:              GPLv3 or later
- * Text Domain:          woocommerce-safe2pay
+ * Text Domain:          woo-safe2pay
  * Domain Path:          /languages
  * WC requires at least: 3.0.0
  * WC tested up to:      3.5.0

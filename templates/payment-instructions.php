@@ -18,17 +18,17 @@ if (!defined('ABSPATH')) {
 	<div class="woocommerce-message">
 		<span>
 			<a class="button" href="<?php echo esc_url($link); ?>" target="_blank">
-				<?php _e('Visualizar Boleto Bancário', 'woocommerce-safe2pay'); ?>
+				<?php _e('Visualizar Boleto Bancário', 'woo-safe2pay'); ?>
 			</a>
-			<?php _e('Clique no botão para visualizar o seu boleto bancário.', 'woocommerce-safe2pay'); ?>
+			<?php _e('Clique no botão para visualizar o seu boleto bancário.', 'woo-safe2pay'); ?>
 
 			<br />
 
-			<?php _e('Você pode imprimi-lo e pagar através do seu internet banking ou qualquer casa lotérica.', 'woocommerce-safe2pay'); ?>
+			<?php _e('Você pode imprimi-lo e pagar através do seu internet banking ou qualquer casa lotérica.', 'woo-safe2pay'); ?>
 
 			<br />
 
-			<?php _e('Após a confirmação do pagamento, Seu pedido será processado.', 'woocommerce-safe2pay'); ?>
+			<?php _e('Após a confirmação do pagamento, Seu pedido será processado.', 'woo-safe2pay'); ?>
 		</span>
 
 	</div>
@@ -37,8 +37,8 @@ if (!defined('ABSPATH')) {
 
 	<div class="woocommerce-message">
 		<span>
-			<?php _e('Pagamento autorizado', 'woocommerce-safe2pay'); ?></a>
-			<?php _e('Tudo certo! Seu pedido será processado.', 'woocommerce-safe2pay'); ?>
+			<?php _e('Pagamento autorizado', 'woo-safe2pay'); ?></a>
+			<?php _e('Tudo certo! Seu pedido será processado.', 'woo-safe2pay'); ?>
 	</div>
 
 <?php elseif ('3' == $type) : ?>
@@ -58,7 +58,7 @@ if (!defined('ABSPATH')) {
 		<br />
 
 		<div style="text-align: center;">
-			<?php _e('Após a confirmação do pagamento, Seu pedido será processado.', 'woocommerce-safe2pay'); ?>
+			<?php _e('Após a confirmação do pagamento, Seu pedido será processado.', 'woo-safe2pay'); ?>
 		</div>
 
 		<br />
@@ -67,14 +67,14 @@ if (!defined('ABSPATH')) {
 
 <?php elseif ('4' == $type) : ?>
 	<div class="woocommerce-message">
-		<?php _e('Pagamento autorizado', 'woocommerce-safe2pay'); ?></a>
-		<?php _e('Tudo certo! Seu pedido será processado.', 'woocommerce-safe2pay'); ?>
+		<?php _e('Pagamento autorizado', 'woo-safe2pay'); ?></a>
+		<?php _e('Tudo certo! Seu pedido será processado.', 'woo-safe2pay'); ?>
 	</div>
 
 <?php else : ?>
 
 	<div class="woocommerce-message">
-		<span><?php echo sprintf(__('Ocorreu um erro ao visualizar o recibo.', 'woocommerce-safe2pay'), '<strong>' . $installments . 'x</strong>', '<strong>' . $method . '</strong>'); ?><br /><?php _e('As soon as the credit card operator confirm the payment, your order will be processed.', 'woocommerce-safe2pay'); ?></span>
+		<span><?php echo sprintf(__('Ocorreu um erro ao visualizar o recibo.', 'woo-safe2pay'), '<strong>' . $installments . 'x</strong>', '<strong>' . $method . '</strong>'); ?><br /><?php _e('As soon as the credit card operator confirm the payment, your order will be processed.', 'woo-safe2pay'); ?></span>
 	</div>
 
 <?php

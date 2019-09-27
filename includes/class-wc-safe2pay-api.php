@@ -261,7 +261,7 @@ class WC_Safe2Pay_API
 				return array(
 					'url'   => '',
 					'data'  => '',
-					'error' => array(__('Too bad! The email or token from the Safe2Pay are invalids my little friend!', 'woocommerce-safe2pay')),
+					'error' => array(__('Too bad! The email or token from the Safe2Pay are invalids my little friend!', 'woo-safe2pay')),
 				);
 			}
 		} catch (Exception $e) {
@@ -270,7 +270,7 @@ class WC_Safe2Pay_API
 			return array(
 				'url'   => '',
 				'token' => '',
-				'error' => array('<strong>' . __('Safe2Pay', 'woocommerce-safe2pay') . '</strong>: ' . __('An error has occurred while processing your payment, please try again. Or contact us for assistance.', 'woocommerce-safe2pay')),
+				'error' => array('<strong>' . __('Safe2Pay', 'woo-safe2pay') . '</strong>: ' . __('An error has occurred while processing your payment, please try again. Or contact us for assistance.', 'woo-safe2pay')),
 			);
 		}
 	}
@@ -286,7 +286,7 @@ class WC_Safe2Pay_API
 			return array(
 				'url'   => '',
 				'data'  => '',
-				'error' => array('<strong>' . __('Safe2Pay', 'woocommerce-safe2pay') . '</strong>: ' .  __('Please, select a payment method.', 'woocommerce-safe2pay')),
+				'error' => array('<strong>' . __('Safe2Pay', 'woo-safe2pay') . '</strong>: ' .  __('Please, select a payment method.', 'woo-safe2pay')),
 			);
 		}
 
@@ -315,7 +315,7 @@ class WC_Safe2Pay_API
 			return array(
 				'url'   => '',
 				'data'  => '',
-				'error' => array(__('You are not allowed to use the Safe2Pay Transparent Checkout. Looks like you neglected to installation guide of this plugin. This is not pretty, do you know?', 'woocommerce-safe2pay')),
+				'error' => array(__('You are not allowed to use the Safe2Pay Transparent Checkout. Looks like you neglected to installation guide of this plugin. This is not pretty, do you know?', 'woo-safe2pay')),
 			);
 		} else {
 			try {
@@ -328,7 +328,7 @@ class WC_Safe2Pay_API
 						return array(
 							'url'   => '',
 							'data'  => '',
-							'error' => array('<strong>' . __('Safe2Pay', 'woocommerce-safe2pay') . '</strong>: ' .  __($response->ResponseDetail->Message, 'woocommerce-safe2pay')),
+							'error' => array('<strong>' . __('Safe2Pay', 'woo-safe2pay') . '</strong>: ' .  __($response->ResponseDetail->Message, 'woo-safe2pay')),
 						);
 					}
 
@@ -349,7 +349,7 @@ class WC_Safe2Pay_API
 					return array(
 						'url'   => '',
 						'data'  => '',
-						'error' => array('<strong>' . __('Safe2Pay', 'woocommerce-safe2pay') . '</strong>: ' .  __($response->Error, 'woocommerce-safe2pay')),
+						'error' => array('<strong>' . __('Safe2Pay', 'woo-safe2pay') . '</strong>: ' .  __($response->Error, 'woo-safe2pay')),
 					);
 				}
 			} catch (Exception $e) {

@@ -102,7 +102,7 @@ class WC_Safe2Pay
 	 */
 	public static function load_plugin_textdomain()
 	{
-		load_plugin_textdomain('woocommerce-safe2pay', false, dirname(plugin_basename(WC_SAFE2PAY_PLUGIN_FILE)) . '/languages/');
+		load_plugin_textdomain('woo-safe2pay', false, dirname(plugin_basename(WC_SAFE2PAY_PLUGIN_FILE)) . '/languages/');
 	}
 
 	/**
@@ -115,7 +115,7 @@ class WC_Safe2Pay
 	public static function plugin_action_links($links)
 	{
 		$plugin_links   = array();
-		$plugin_links[] = '<a href="' . esc_url(admin_url('admin.php?page=wc-settings&tab=checkout&section=safe2pay')) . '">' . __('Settings', 'woocommerce-safe2pay') . '</a>';
+		$plugin_links[] = '<a href="' . esc_url(admin_url('admin.php?page=wc-settings&tab=checkout&section=safe2pay')) . '">' . __('Settings', 'woo-safe2pay') . '</a>';
 
 		return array_merge($plugin_links, $links);
 	}
