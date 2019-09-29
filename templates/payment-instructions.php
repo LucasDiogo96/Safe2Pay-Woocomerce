@@ -19,16 +19,11 @@ if (!defined('ABSPATH')) {
 		<span>
 			<a class="button" href="<?php echo esc_url($link); ?>" target="_blank">
 				<?php _e('Visualizar Boleto Bancário', 'woo-safe2pay'); ?>
+				<br />
 			</a>
-			<?php _e('Clique no botão para visualizar o seu boleto bancário.', 'woo-safe2pay'); ?>
 
-			<br />
-
-			<?php _e('Você pode imprimi-lo e pagar através do seu internet banking ou qualquer casa lotérica.', 'woo-safe2pay'); ?>
-
-			<br />
-
-			<?php _e('Após a confirmação do pagamento, Seu pedido será processado.', 'woo-safe2pay'); ?>
+			<?php _e('Clique no botão para visualizar o seu boleto bancário. 
+					Após a confirmação do pagamento, seu pedido será processado.', 'woo-safe2pay'); ?>
 		</span>
 
 	</div>
