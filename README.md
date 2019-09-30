@@ -13,7 +13,7 @@ Transações de pagamento online devem ser rápidas e simples, sem asteriscos ou
 
 ## Instalação e configuração
 
-1. Faça o download do plugin no nosso repositório do Github.
+1. Faça o download do plugin no nosso repositório do Github ou na [loja do Wordpress](https://wordpress.org/plugins/safe2pay/)
 2. Após isso, faça login no painel do WordPress, navegue até o menu Plugins e clique em **Adicionar novo**.
 3. Em seguida faça o upload do arquivo e clique em **Instalar agora**.
 4. Após instalar e ativar o plug-in, clique em **configurações** no plugin.
